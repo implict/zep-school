@@ -1,0 +1,190 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      * {
+        z-index: 10000;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        font-family: 'Pretendard-Regular';
+        /* font-family: Arial, Helvetica, sans-serif; */
+
+      }
+
+      .widget{
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+            font-weight: bold;
+            width: 400px;
+            height: 214px;
+            position: absolute;
+            left: 50%;
+		        transform: translate(-50%);
+            font-size: 12px;
+      }
+
+      body{
+        margin: 0;
+        padding: 0;
+      }
+
+      .quit_title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        /* height: 48px; */
+        padding: 17px 20px;
+        color: #5E6066;
+      }
+
+      .quit_content{
+        font-size: 14px;
+        width:  100%;
+        height: 98px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 32px 20px 40px;
+        box-sizing: border-box;
+        font-weight: 600;
+      }
+
+      .quit_controls{
+        display: flex;
+        padding: 14px 20px 18px 20px;
+        gap: 8px;
+      }
+
+      .btn{
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 36px;
+        font-size: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      #delete{
+      color: red;
+      background-color: #FFF2F7;
+      font-weight: 600;
+	  }
+
+      #cancle{
+        color: #67696f;
+        font-weight: 600;
+      }
+
+      /* @media(max-width: 450px){
+        .widget{
+          width: 280px;
+          height: 182px;
+          }
+
+        .quit_controls{
+          display: flex;
+          padding: 14px 10px 18px 10px;
+          gap: 8px;
+        }
+        .quit_title{
+          font-size: 16px;
+        }
+
+        .quit_content{
+          padding: 24px 10px;
+          font-size: 13px;
+          height: 70px;
+        }
+
+        #delete,#cancle{
+          height: 36px;
+        }
+      } */
+
+      @media(max-width: 280px){
+        .widget{
+          width: 280px;
+          height: 182px;
+          }
+        
+        .quit_content{
+          padding: 27px 10px;
+          font-size: 13px;
+          height: auto;
+        }
+
+        .quit_controls{
+          display: flex;
+          padding: 14px 10px 18px 10px;
+          gap: 8px;
+        }
+
+        #delete,#cancle{
+          height: 36px;
+        }
+      }
+
+    </style>
+</head>
+<body>
+    <div class="widget">
+        <div class="quit_title">
+            
+        </div>
+        <div class="quit_content">
+            <span></span>
+        </div>
+        <div class="quit_controls">
+            <button  class="btn" id="cancle" onclick="select('cancle');">취소</button>
+            <button  class="btn" id="delete"   onclick="select('delete');" >삭제</button>
+        </div>
+    </div>
+    <script>
+          function select(type, option) {
+                window.parent.postMessage({type, playerId: option }, "*");
+
+                document.querySelector('.widget').style.display = 'none';
+                
+                window.parent.postMessage({
+                  type: 'WidgetRearrange',
+                  width: '0px',  // 리사이징 옵션
+                  height: '0px',  // 리사이징 옵션
+                }, "*");  
+            }
+
+            window.addEventListener("message",(e)=>{
+              if(!e.data.str1)
+                  return;
+                  
+
+              if(e.data.type == 'show'){
+                  window.parent.postMessage({
+                  type: 'WidgetRearrange',
+                  width:  !e.data.mobile ? '400px' : '280px',  // 리사이징 옵션
+                  height: !e.data.mobile ? '214px' : '182px',  // 리사이징 옵션
+                }, "*");
+
+                document.querySelector('.widget').style.display = 'block';
+              }
+
+               document.querySelector('.quit_title').textContent =  e.data.str1;
+               document.querySelector('.quit_content span').textContent =  e.data.str2;
+               document.querySelector('#delete').textContent =  e.data.str_delete;
+               document.querySelector('#cancle').textContent =  e.data.str_cancle; 
+
+            })
+           
+        
+    </script>
+</body>

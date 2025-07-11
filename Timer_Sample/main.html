@@ -1,0 +1,214 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+</head>
+<style>
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        color: #27262E;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        font-family: 'Pretendard-Regular';
+    }
+
+    .widget-wrapper {
+        font-size: 13px;
+        width: 240px;
+        height: 220px;
+        background-color: #FFFCE0;
+        border-radius: 4px;
+    }
+
+    .header {
+        margin: 12px 10px;
+        display: flex;
+        align-items: center;
+        min-height: 10px;
+    }
+
+    .header-title {
+        float: left;
+    }
+
+    .header-control {
+        display: flex;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .header-control-delete {
+        margin-right: 9px;
+    }
+
+    .widget-contents {
+        height: 168px;
+        padding: 0px 10px 8px;
+        display: flex;
+
+    }
+
+    .widget-contents-text::-webkit-scrollbar {
+        display: none;
+        width: 0 !important;
+    }
+
+    .widget-contents-text {
+        width: 100%;
+        /* height: 166px; */
+        background-color: #FFFCE0;
+        border: none;
+        outline: none;
+        resize: none;
+        line-height: 140%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow: auto;
+        color: #27262E;
+    }
+
+    .header-control-delete,
+    .header-control-quit,
+    .header-control-mini {
+        cursor: pointer;
+        color: #27262E;
+
+    }
+
+    textarea {
+        color: #27262E;
+        font-size: 13px;
+    }
+
+    .header-control-mini {
+        margin-right: 9px;
+    }
+
+    /* 모바일 */
+    @media (min-width: 255px) and (max-width: 768px) {
+        .widget-wrapper {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 168px;
+        }
+
+        .widget-contents {
+            height: 124px;
+        }
+
+        .widget-contents-text {
+            /* height: max-content; */
+            height: 90%;
+        }
+    }
+</style>
+
+<body>
+    <div class="widget-wrapper">
+        <div class="header">
+            <h4 class="header-title">빠른 메모</h4>
+            <div class="header-control">
+                <div class="header-control-delete" onclick="onClickHandler('delete')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.83268 3.33268C5.83268 2.41221 6.57887 1.66602 7.49935 1.66602H12.4993C13.4198 1.66602 14.166 2.41221 14.166 3.33268V4.99935H15.8241C15.8292 4.9993 15.8344 4.9993 15.8396 4.99935H17.4993C17.9596 4.99935 18.3327 5.37245 18.3327 5.83268C18.3327 6.29292 17.9596 6.66602 17.4993 6.66602H16.6086L15.8858 16.7848C15.8236 17.6569 15.0978 18.3327 14.2234 18.3327H5.77528C4.90088 18.3327 4.17515 17.6569 4.11285 16.7848L3.39008 6.66602H2.49935C2.03911 6.66602 1.66602 6.29292 1.66602 5.83268C1.66602 5.37245 2.03911 4.99935 2.49935 4.99935H4.15914C4.16431 4.9993 4.16947 4.9993 4.17462 4.99935H5.83268V3.33268ZM7.49935 4.99935H12.4993V3.33268H7.49935V4.99935ZM5.061 6.66602L5.77528 16.666H14.2234L14.9377 6.66602H5.061ZM8.33268 8.33268C8.79292 8.33268 9.16602 8.70578 9.16602 9.16602V14.166C9.16602 14.6263 8.79292 14.9993 8.33268 14.9993C7.87245 14.9993 7.49935 14.6263 7.49935 14.166V9.16602C7.49935 8.70578 7.87245 8.33268 8.33268 8.33268ZM11.666 8.33268C12.1263 8.33268 12.4993 8.70578 12.4993 9.16602V14.166C12.4993 14.6263 12.1263 14.9993 11.666 14.9993C11.2058 14.9993 10.8327 14.6263 10.8327 14.166V9.16602C10.8327 8.70578 11.2058 8.33268 11.666 8.33268Z"
+                            fill="#27262E" />
+                    </svg>
+                </div>
+                <div class="header-control-mini" onclick="onClickHandler('mini')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2.5" y="14.166" width="15" height="1.66667" rx="0.833333" fill="#27262E" />
+                    </svg>
+                </div>
+                <!--
+                    <div class="header-control-quit" onclick="onClickHandler('quit')">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.41009 4.41009C4.73553 4.08466 5.26317 4.08466 5.5886 4.41009L9.99935 8.82084L14.4101 4.41009C14.7355 4.08466 15.2632 4.08466 15.5886 4.41009C15.914 4.73553 15.914 5.26317 15.5886 5.5886L11.1779 9.99935L15.5886 14.4101C15.914 14.7355 15.914 15.2632 15.5886 15.5886C15.2632 15.914 14.7355 15.914 14.4101 15.5886L9.99935 11.1779L5.5886 15.5886C5.26317 15.914 4.73553 15.914 4.41009 15.5886C4.08466 15.2632 4.08466 14.7355 4.41009 14.4101L8.82084 9.99935L4.41009 5.5886C4.08466 5.26317 4.08466 4.73553 4.41009 4.41009Z" fill="#27262E"/>
+                        </svg>
+                    </div>
+                -->
+            </div>
+        </div>
+        <div class="widget-contents">
+            <textarea maxlength="500" onkeyup="onChangeEvent()" class="widget-contents-text"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    let mini = document.querySelector('.header-control-mini');
+    //mini.style.display = 'none';
+    window.parent.focus();
+    window.addEventListener("message", (e) => {
+        if (e.data.type == "init") {
+            window.parent.postMessage({
+                type: 'WidgetRearrange',
+                width: `${document.querySelector(".widget-wrapper").scrollWidth}px`,  // 리사이징 옵션
+                height: `${document.querySelector(".widget-wrapper").scrollHeight}px`,  // 리사이징 옵션
+            }, "*");
+        }
+    })
+
+
+    function onClickHandler(type) {
+        window.parent.postMessage(
+            {
+                type,
+            },
+            "*"
+        );
+    }
+
+    function onChangeEvent() {
+        let text = document.querySelector('textarea').value;
+
+        window.parent.postMessage(
+            {
+                type: 'text',
+                text
+            },
+            "*"
+        );
+    }
+
+    window.addEventListener("message", function (e) {
+        if (!e.data.str1)
+            return;
+
+        if (e.data.type == 'delete') {
+            if (confirm(e.data.str3 + '?'))
+                document.querySelector('textarea').value = '';
+        } else {
+            //  document.querySelector('textarea').focus();
+        }
+
+        document.querySelector('.header-title').textContent = e.data.str1;
+        document.querySelector('textarea').placeholder = e.data.str2;
+
+        //if (e.data.mobile)
+        //  mini.style.display = 'block';
+
+        if (e.data.savedText)
+            document.querySelector('textarea').value = e.data.savedText;
+    })
+
+    window.addEventListener("keydown", (e) => {
+        if (e.keyCode == 9) {
+            e.preventDefault();
+            window.parent.focus();
+        }
+    })
+
+</script>

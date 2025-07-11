@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <style>
+        body {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <svg style="box-shadow: 0 0 0px 2px #ede1f5; border-radius: 10px;" onclick="onClickEvent();" width="40" height="40"
+        viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_17033_278368)">
+            <rect width="40" height="40" rx="8" fill="#494851" />
+            <rect x="5.04492" y="9.03125" width="15.8989" height="15.8989" transform="rotate(-11.5511 5.04492 9.03125)"
+                fill="#85C4FF" />
+            <rect x="20.6426" y="9.38086" width="15.8989" height="15.8989" transform="rotate(15 20.6426 9.38086)"
+                fill="#FFA5DB" />
+            <rect x="11.8379" y="16.8008" width="15.8989" height="15.8989" transform="rotate(4.10203 11.8379 16.8008)"
+                fill="#FDE150" />
+        </g>
+        <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="black" stroke-opacity="0.1" />
+        <defs>
+            <clipPath id="clip0_17033_278368">
+                <rect width="40" height="40" rx="8" fill="white" />
+            </clipPath>
+        </defs>
+    </svg>
+    <script>
+        function onClickEvent() {
+            window.parent.postMessage({
+                type: 'full'
+            }, "*")
+
+        }
+        window.addEventListener("message", (e) => {
+            if (e.data.mobile == true) {
+                window.parent.postMessage({
+                    type: 'WidgetRearrange',
+                    width: '60px',  // 리사이징 옵션
+                    height: '60px',  // 리사이징 옵션
+                    top: '120px', // 위치조정
+                    anchor: 'topleft'
+                }, "*");
+            } else {
+                window.parent.postMessage({
+                    type: 'WidgetRearrange',
+                    width: '60px',  // 리사이징 옵션
+                    height: '60px',  // 리사이징 옵션
+                    top: '-200px', // 위치조정
+                    anchor: 'bottomleft'
+                }, "*");
+            }
+        })
+
+
+
+    </script>
+</body>
+
+
+</html>
