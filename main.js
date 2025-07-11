@@ -1,5 +1,20 @@
 // main.js
 
+
+//UI가 노출될 위치(정렬, 가로, 세로) 값을 변수로 사전에 제작
+let postion = 'middle';
+let width = 400;
+let height = 400;
+
+// my.html로 state라는 태그를 만들어 hello라는 값을 전달
+let _widget = player.showWidget('my.html', position, width, height);
+_widget.sendMessage({
+	state: "hello",
+}); 
+
+
+
+
 App.showCenterLabel("Hello world");
 
 // App이 최초로 시작될 때

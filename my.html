@@ -1,0 +1,11 @@
+<html>
+<div id="test">-</div>
+<script type="text/javascript">
+		window.addEventListener('message', function(e) {
+			// state라는 태그 밸류를 보냈으니 아래 형태로 받는다
+			var state = e.data.state; 
+			// 위의 id test 라는 곳의 텍스트로 적용한다
+			document.getElementById("test").innerText = state;
+		})
+</script>
+</html>
